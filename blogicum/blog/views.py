@@ -48,7 +48,7 @@ def index(request):
     sorted_posts = sorted(posts, key=lambda post: post['id'], reverse=True)
     return render(
         request,
-        'index.html',
+        'blog/index.html',
         context={'posts': sorted_posts},
     )
 
@@ -58,7 +58,7 @@ def post_detail(request, post_id):
         if post['id'] == post_id:
             return render(
                 request,
-                'detail.html',
+                'blog/detail.html',
                 context={'post': post},
             )
 
@@ -66,6 +66,6 @@ def post_detail(request, post_id):
 def category_posts(request, category_slug):
     return render(
         request,
-        'category.html',
+        'blog/category.html',
         context={'category_slug': category_slug},
     )
