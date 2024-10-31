@@ -16,6 +16,6 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('blog/', include('blog.urls', namespace='blog')),
+    path('', include('blog.urls', namespace='blog')),
     path('pages/', include('pages.urls', namespace='pages')),
 ]
