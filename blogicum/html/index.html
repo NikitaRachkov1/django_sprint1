@@ -16,19 +16,19 @@
     <header>
       <nav class="navbar navbar-light" style="background-color: lightskyblue">
         <div class="container">
-          <a class="navbar-brand" href="{% url 'index' %}">
+          <a class="navbar-brand" href="{% url 'blog:index' %}">
             <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
             Блогикум
           </a>
           <ul class="nav nav-pills">
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'index' %}">Лента записей</a>
+              <a class="nav-link active" href="{% url 'blog:index' %}">Лента записей</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">О проекте</a>
+              <a class="nav-link" href="{% url 'pages:about' %}">О проекте</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'rules' %}">Наши правила</a>
+              <a class="nav-link" href="{% url 'pages:rules' %}">Наши правила</a>
             </li>
           </ul>
         </div>
@@ -43,10 +43,10 @@
             <ul>
               <li>Место: {{ post.location }}</li>
               <li>Дата: {{ post.date }}</li>
-              <li>Категория: <a href="{% url 'category_posts' post.category %}">{{ post.category }}</a></li>
+              <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
             </ul>
             <p>{{ post.text|truncatewords:10 }}</p>
-            <a href="{% url 'post_detail' post.id %}">Читать полный текст</a>
+            <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
           </article>
         {% endfor %}
       </div>

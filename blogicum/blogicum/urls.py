@@ -13,18 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
-from blog.views import index, post_detail, category_posts
-from pages.views import about, rules
+from django.urls import path, include
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('post/<int:post_id>/', post_detail, name='post_detail'),
-    path(
-        'category/<slug:category_slug>/',
-        category_posts,
-        name='category_posts',
-    ),
-    path('about/', about, name='about'),
-    path('rules/', rules, name='rules'),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('pages/', include('pages.urls', namespace='pages')),
 ]
