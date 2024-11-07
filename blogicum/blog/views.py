@@ -1,7 +1,9 @@
+from typing import List, Dict, Union
+
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
 
-posts: list[dict[str, int | str]] = [
+posts: List[Dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
