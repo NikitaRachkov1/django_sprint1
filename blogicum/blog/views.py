@@ -1,6 +1,7 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 
-posts = [
+posts: list[dict[str, int | str]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -43,29 +44,36 @@ posts = [
     },
 ]
 
+posts_dict = {}
+
 
 def index(request):
     sorted_posts = sorted(posts, key=lambda post: post['id'], reverse=True)
     return render(
         request,
         'blog/index.html',
-        context={'posts': sorted_posts},
+        context={'posts': sorted_posts, 'title': 'Лента записей'},
     )
 
 
 def post_detail(request, post_id):
-    for post in posts:
-        if post['id'] == post_id:
-            return render(
-                request,
-                'blog/detail.html',
-                context={'post': post},
-            )
+    global posts_dict
+    if not posts_dict:
+        for post in posts:
+            posts_dict[post['id']] = post
+
+    if post_id in posts_dict:
+        return render(
+            request,
+            'blog/detail.html',
+            context={'post': posts_dict[post_id], 'title': 'Пост'},
+        )
+    return HttpResponseNotFound('Пост с данным id отсутствует')
 
 
 def category_posts(request, category_slug):
     return render(
         request,
         'blog/category.html',
-        context={'category_slug': category_slug},
+        context={'category_slug': category_slug, 'title': category_slug},
     )
