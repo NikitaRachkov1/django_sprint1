@@ -1,9 +1,9 @@
-from typing import List, Dict, Union
+from typing import Union
 
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
 
-posts: List[Dict[str, Union[int, str]]] = [
+posts: list[dict[str, Union[int, str]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -47,6 +47,8 @@ posts: List[Dict[str, Union[int, str]]] = [
 ]
 
 posts_dict = {}
+for post in posts:
+    posts_dict[post['id']] = post
 
 
 def index(request):
@@ -59,11 +61,6 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    global posts_dict
-    if not posts_dict:
-        for post in posts:
-            posts_dict[post['id']] = post
-
     if post_id in posts_dict:
         return render(
             request,

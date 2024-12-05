@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<main>
-  <div class="container py-5">
-    <article>
-      {% include 'post_card.html' %}
-      <p>{{ post.text|linebreaks }}</p>
-    </article>
-  </div>
-</main>
+<article>
+  {% include 'post_card.html' %}
+</article>
 {% endblock content %}
